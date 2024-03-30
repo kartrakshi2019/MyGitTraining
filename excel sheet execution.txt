@@ -1,0 +1,39 @@
+public void loginformvalid() { 
+ try
+		 { 
+		  //validation execution started here
+		  XSSFSheet s=w.getSheet(obj.getProperty("sheetname"));
+		  String sheetname=obj.getProperty("sheetname");
+		  System.out.println("Sheet Name is : "+sheetname);
+			rowcount=s.getLastRowNum();
+			System.err.println("No of rows :"+rowcount);
+			for(int i=1;i<=rowcount;i++)
+			{
+			LogFile.logReset();
+			XSSFRow r=s.getRow(i);
+			r.getCell(0).setCellType(CellType.STRING);
+			r.getCell(1).setCellType(CellType.STRING);
+			uname=r.getCell(0).getStringCellValue();
+			password=r.getCell(1).getStringCellValue();
+			
+			//Login page Execution started
+			driver.get(obj.getProperty("url"));
+		       LogFile.logWriter("Login Page Execution Started");
+		       System.err.println("Login Page Execution Started, Row: "+i);
+		       Thread.sleep(3000);
+		       driver.findElement(By.xpath(obj.getProperty("username"))).clear();
+			   driver.findElement(By.xpath(obj.getProperty("username"))).sendKeys(uname);
+			   driver.findElement(By.xpath(obj.getProperty("password"))).clear();
+			   driver.findElement(By.xpath(obj.getProperty("password"))).sendKeys(password);
+			   LogFile.logWriter("Username and Password Entered:"+uname+","+password);
+			   System.err.println("Username and Password Entered:"+uname+","+password);
+			   driver.findElement(By.xpath(obj.getProperty("submit"))).click();
+			   Thread.sleep(4000);
+		
+				} 
+	  catch(Exception e)
+	  {
+		  System.err.println("Error Message:"+e.getMessage());
+	  }
+}
+  

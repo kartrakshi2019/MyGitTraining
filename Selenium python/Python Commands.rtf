@@ -1,0 +1,405 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\colortbl ;\red0\green0\blue255;\red255\green0\blue0;}
+{\*\generator Riched20 10.0.17134}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\ul\b\f0\fs36\lang9 Python selenium commands cheat sheet\par
+\par
+
+\pard\sa200\sl276\slmult1\ulnone\b0\fs24 Frequently used python selenium commands \f1\endash  Cheat Sheet\par
+To import webdriver module in python use below import statement\par
+from selenium import webdriver\par
+\ul\b Driver setup:\ulnone\b0\par
+\ul\b Firefox:\ulnone\b0\par
+firefoxdriver = webdriver.Firefox(executable_path=\rdblquote Path to Firefox driver\rdblquote )\par
+To download: Visit GitHub\f0\lang1033 _ {{\field{\*\fldinst{HYPERLINK https://github.com/mozilla/geckodriver/releases }}{\fldrslt{https://github.com/mozilla/geckodriver/releases\ul0\cf0}}}}\f0\fs24\par
+\ul\b Chrome:\ulnone\b0\par
+chromedriver = webdriver.Chrome(executable_path=\rdblquote Path to Chrome driver\rdblquote )\par
+To download: Visit Here_ {{\field{\*\fldinst{HYPERLINK https://sites.google.com/a/chromium.org/chromedriver/downloads }}{\fldrslt{https://sites.google.com/a/chromium.org/chromedriver/downloads\ul0\cf0}}}}\f0\fs24\par
+\ul\b\lang9 Internet Explorer:\ulnone\b0\par
+iedriver = webdriver.IE(executable_path=\rdblquote\-Pat\-h To\- IEDriverServer.exe\rdblquote )\par
+To download: Visit Here_ \par
+{{\field{\*\fldinst{HYPERLINK http://selenium-release.storage.googleapis.com/index.html }}{\fldrslt{http://selenium-release.storage.googleapis.com/index.html\ul0\cf0}}}}\f0\fs24\par
+\ul\b Edge:\ulnone\b0\par
+edgedriver = webdriver.Edge(executable_path=\rdblquote\-Pat\-h To\- MicrosoftWebDriver.exe\rdblquote )\par
+To download: Visit Here_ \par
+{{\field{\*\fldinst{HYPERLINK https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ }}{\fldrslt{https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/\ul0\cf0}}}}\f0\fs24\par
+\ul\b Opera:\ulnone\b0\par
+operadriver = webdriver.Opera(executable_path=\rdblquote\-Pat\-h To\- operadriver\rdblquote )\par
+To download: visit GitHub:\par
+{{\field{\*\fldinst{HYPERLINK https://github.com/operasoftware/operachromiumdriver/releases }}{\fldrslt{https://github.com/operasoftware/operachromiumdriver/releases\ul0\cf0}}}}\f0\fs24\par
+\ul\b Browser Arguments:\ulnone\b0\par
+\ul\f1\endash headless\ulnone\par
+To open browser in headless mode. Works in both Chrome and Firefox browser\par
+\ul\b\endash start-maximized\ulnone\b0\par
+To start browser maximized to screen. Requires only for Chrome browser. Firefox by default starts maximized\par
+\ul\b\endash incognito\ulnone\b0\par
+To open private chrome browser\par
+\ul\b\endash disable-notifications\ulnone\b0\par
+To disable notifications, works Only in Chrome browser\par
+\ul\b Example:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.chrome.options import Options\par
+options = Options();\par
+options.add_argument("--headless");\par
+options.add_argument("--start-maximized");\par
+options.add_argument("--disable-notifications");\par
+options.add_argument("--incognito");\par
+driver = webdriver.Chrome(chrome_options=options, executable_path="Path to driver");\par
+\b\f0\lang1033 or\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.chrome.options import Options\par
+options = Options();\par
+options.add_argument("--incognito","--start-maximized","--headless");\par
+driver = webdriver.Chrome(chrome_options=options, executable_path="Path to driver");\par
+\par
+\ul\b To Auto Download in Chrome:\ulnone\b0\par
+from selenium import webdriver\par
+options = webdriver.ChromeOptions() \par
+options.add_argument("download.default_directory=")\par
+driver = webdriver.Chrome(chrome_options=options, executable_path="Path to chrome driver")\par
+\par
+\ul\b To Auto Download in Firefox:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.firefox.options import Options\par
+firefoxOptions = Options();\par
+firefoxOptions.set_preference("browser.download.folderList",2);\par
+firefoxOptions.set_preference("browser.download.manager.showWhenStarting", False);\par
+firefoxOptions.set_preference("browser.download.dir","/data");\par
+firefoxOptions.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream,application/vnd.ms-excel");\par
+firefoxdriver = webdriver.Firefox(firefox_options=firefoxOptions, executable_path="Path to firefox driver");\par
+\par
+\ul\b We can add any MIME types in the list. MIME for few types of files are given below.\ulnone\b0\par
+\par
+Text File (.txt) \f1\endash  text/plain\par
+PDF File (.pdf) \endash  application/pdf\par
+CSV File (.csv) \endash  text/csv or \ldblquote application/csv\rdblquote\par
+MS Excel File (.xlsx) \endash  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet or application/vnd.ms-excel\par
+MS word File (.docx) \endash  application/vnd.openxmlformats-officedocument.wordprocessingml.document\par
+Zip file (.zip) \endash  application/zip\par
+\par
+\ul\b Note:\ulnone\b0\par
+The value of browser.download.folderList can be set to either 0, 1, or 2.\par
+0 \endash  Files will be downloaded on the user\rquote s desktop.\par
+1 \endash  Files will be downloaded in the Downloads folder.\par
+2 \endash  Files will be stored on the location specified for the most recent download\par
+\par
+\ul\b Disable notifications in Firefox\f0 :\ulnone\b0\f1\par
+firefoxOptions.set_preference(\ldblquote dom.webnotifications.serviceworker.enabled\rdblquote , false);\par
+firefoxOptions.set_preference(\ldblquote dom.webnotifications.enabled\rdblquote , false);\par
+\par
+\ul\b Open specific Firefox browser using Binary:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary\par
+binary = FirefoxBinary('path/to/binary')\par
+driver = webdriver.Firefox(firefox_binary=binary)\par
+\par
+\ul\b Open specific Chrome browser using Binary:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.chrome.options import Options\par
+options = Options()\par
+options.binary_location = \ldblquote\rdblquote\par
+driver = webdriver.Chrome(chrome_options=options, executable_path=\rdblquote\rdblquote )\par
+driver.get(\lquote http://google.com/\rquote )\par
+\par
+\ul\b Read Browser Details:\ulnone\b0\par
+driver.title\par
+driver.window_handles\par
+driver.current_window_handles\par
+driver.current_url\par
+driver.page_source\par
+\par
+\ul\b Go to a specified URL:\ulnone\b0\par
+driver.get(\ldblquote http://google.com\rdblquote )\par
+driver.back()\par
+driver.forward()\par
+driver.refresh()\par
+\par
+\ul\b Locating Elements:\ulnone\b0\par
+driver.find_element_by_ \endash  To find the first element matching the given locator argument. Returns a WebElement\par
+driver.find_elements_by_ \endash  To find all elements matching the given locator argument. Returns a list of WebElement\par
+\par
+\ul\b By ID\ulnone\b0\par
+<input id=\rdblquote q\rdblquote  type=\rdblquote text\rdblquote  />\par
+element = driver.find_element_by_id(\ldblquote q\rdblquote )\par
+\par
+\ul\b By Name\ulnone\b0\par
+<input id=\rdblquote q\rdblquote  name=\rdblquote search\rdblquote  type=\rdblquote text\rdblquote  />\par
+element = driver.find_element_by_name(\ldblquote search\rdblquote )\par
+\par
+\ul\b By Class Name\ulnone\b0\par
+<div class=\rdblquote username\rdblquote  style=\rdblquote display: block;\rdblquote >\'85</div>\par
+element = driver.find_element_by_class_name(\ldblquote username\rdblquote )\par
+\par
+\ul\b By Tag Name\ulnone\b0\par
+<div class=\rdblquote username\rdblquote  style=\rdblquote display: block;\rdblquote >\'85</div>\par
+element = driver.find_element_by_tag_name(\ldblquote div\rdblquote )\par
+\par
+\ul\b By Link Text\ulnone\b0\par
+<a href=\rdblquote #\rdblquote >Refresh</a>\par
+element = driver.find_element_by_link_text(\ldblquote Refresh\rdblquote )\par
+\par
+\ul\b By Partial Link Text\ulnone\b0\par
+<a href=\rdblquote #\rdblquote >Refresh Here</a>\par
+element = driver.find_element_by_partial_link_text(\ldblquote Refresh\rdblquote )\par
+\par
+\ul\b By XPath\ulnone\b0\par
+<form id=\rdblquote testform\rdblquote  action=\rdblquote submit\rdblquote  method=\rdblquote get\rdblquote >\par
+Username: <input type=\rdblquote text\rdblquote  />\par
+Password: <input type=\rdblquote password\rdblquote  />\par
+</form>\par
+element = driver.find_element_by_xpath(\ldblquote //form[@id=\rquote testform\rquote ]/input[1]\rdblquote )\par
+\par
+\ul\b By CSS Selector\ulnone\b0\par
+<form id=\rdblquote testform\rdblquote  action=\rdblquote submit\rdblquote  method=\rdblquote get\rdblquote >\par
+<input class=\rdblquote username\rdblquote  type=\rdblquote text\rdblquote  />\par
+<input class=\rdblquote password\rdblquote  type=\rdblquote password\rdblquote  />\par
+</form>\par
+element = driver.find_element_by_css_selector(\ldblquote form#testform>input.username\rdblquote )\par
+\par
+\ul Important Modules to Import:\ulnone\par
+\par
+from selenium import webdriver\par
+from selenium.webdriver.support.wait import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions\par
+from selenium.webdriver.support.ui import Select\par
+from selenium.webdriver.common.by import By\par
+from selenium.webdriver.common.action_chains import ActionChains\par
+from selenium.common.exceptions import NoSuchElementException\par
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary\par
+from selenium.webdriver.chrome.options import Options\par
+from selenium.webdriver.firefox.options import Options\par
+\par
+\ul\b Python Selenium commands for operation on elements:\ulnone\b0\par
+\ul\b button/link/image:\ulnone\b0\par
+click()\par
+get_attribute()\par
+is_displayed()\par
+is_enabled()\par
+\par
+\ul\b Text field:\ulnone\b0\par
+send_keys()\par
+clear()\par
+\par
+\ul\b Checkbox/Radio:\ulnone\b0\par
+is_selected()\par
+click()\par
+\par
+\ul\b Select:\ulnone\b0\par
+Find out the select element using any element locating strategies and then select options from list using index, visible text or option value.\par
+select = Select(driver.find_element_by_id(""));\par
+select.select_by_index(1);\par
+select.select_by_value(""); # pass value\par
+select.select_by_visible_text(""); # pass visible text\par
+\par
+\ul\b Element properties:\ulnone\b0\par
+is_displayed()\par
+is_selected()\par
+is_enabled()\par
+These methods return either true or false.\par
+\par
+\ul\b Read Attribute:\ulnone\b0\par
+get_attribute(\ldblquote\rdblquote )\par
+\par
+\ul\b Get attribute from a disabled text box\f0 :\ulnone\b0\f1\par
+driver.find_element_by_id(\ldblquote id\rdblquote ).get_attribute(\ldblquote value\rdblquote );\par
+\par
+\ul\b Screenshot:\ulnone\b0\par
+from selenium import webdriver\par
+driver = webdriver.Firefox(executable_path='[Browser Driver Path]');\par
+driver.get('[URL to Open]');\par
+driver.get_screenshot_as_file('sample_screenshot_2.png');\par
+driver.save_screenshot('sample_screenshot_1.png');\par
+\par
+Note: An important note to store screenshots is that save_screenshot(\lquote filename\rquote ) and get_screenshot_as_file(\lquote filename\rquote ) will work only when extension of file is \lquote .png\rquote . Otherwise content of the screenshot can\rquote t be viewed\par
+\par
+\par
+
+\pard\sa200\sl276\slmult1\qc\ul\b\fs36 How to work with expected conditions explicit wait\f0 :\par
+\par
+
+\pard\sa200\sl276\slmult1\ulnone\b0\fs24 These days most of the web applications are using AJAX/Dynamic loading/lazy loading techniques. After loading the web page in the browser, elements within that page may load at different time intervals. This makes locating elements difficult, if an element is not yet present in the DOM, a locate function will raise an ElementNotVisibleException exception. We can solve this issue using waits.\par
+\par
+Selenium WebDriver provides two types of waits \f1\endash  implicit & explicit.\par
+\par
+An explicit wait makes WebDriver wait for a certain condition to occur before proceeding further with execution. To know more about implicit wait, please visit our article here. There are some default and convenience methods available in selenium package that will help you to write code that will wait only as long as required. WebDriverWait in combination with ExpectedCondition is one way this can be accomplished.\par
+\par
+\ul\b Expected Conditions:\ulnone\b0\par
+There are some common conditions that you face frequently when automating web browsers. Below is the list and explanation of some of Selenium Python binding provided methods in expected_condition class.\par
+class name is \lquote selenium.webdriver.support.expected_conditions\lquote\par
+So you have to import this as \lquote from selenium.webdriver.support import expected_conditions as ec\rquote\par
+Note that \lquote as ec\rquote . This makes the \lquote expected_conditions\rquote  term shorter and easy to use.\par
+All the example here uses a sample page. Download and keep it in your local path to use it in scripts.\par
+\cf2\b alert_is_present\cf0\b0\par
+Expects an alert to be present on the web page.\par
+Parameters: No parameters required\par
+\par
+\ul\b Returns:\ulnone\b0\par
+alert object if alert is present on the web page. Otherwise throws selenium.common.exceptions.TimeoutException.\par
+\par
+\ul\b Example:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.support.ui import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions as ec\par
+driver = webdriver.Chrome()\par
+driver.get("path to test-page.html")\par
+driver.find_element_by_id("show-alert").click()\par
+wait = WebDriverWait(driver, 10)\par
+\b alert = wait.until(ec.alert_is_present())\par
+alert.accept()\par
+\b0 driver.close()\par
+\par
+\ul\b element_located_selection_state_to_be(locator, is_selected)\f0 :\ulnone\b0\f1\par
+Expects an element identified by the locator to be present in the web page and checks whether the expected element is in the selection state specified.\par
+\ul\b Parameters:\ulnone\b0\par
+locator \endash  It is a tuple of (by, path)\par
+is_selected \endash  It is a boolean value. True \endash  Element should be in selected state. False \endash  Element should not be in selected state.\par
+\ul\b Returns:\ulnone\b0\par
+True \endash  when the element is found and in expected selection state before max wait time.\par
+Throws selenium.common.exceptions.TimeoutException when the element is not found or not in expected selection state after wait time.\par
+\par
+\ul\b Example:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.common.by import By\par
+from selenium.webdriver.support.ui import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions as ec\par
+driver = webdriver.Chrome()\par
+driver.get("path to test-page.html")\par
+wait = WebDriverWait(driver, 10)\par
+result = wait.until(ec.element_located_selection_state_to_be((By.ID, 'subscribe-checkbox-selected'), True))\par
+#change True to False to see TimeoutException\par
+print result\par
+result = wait.until(ec.element_located_selection_state_to_be((By.ID, 'terms-checkbox-notselected'), False))\par
+#change False to True to see TimeoutException\par
+print result\par
+driver.close()\par
+\par
+\ul\b element_located_to_be_selected(locator)\f0 :\ulnone\b0\f1\par
+Expects an element identified by the locator to be present in the web page and expects the element to be in selected state.\par
+\ul\b Parameters:\ulnone\b0\par
+locator \endash  It is a tuple of (by, path)\par
+\ul\b Returns:\ulnone\b0\par
+True \endash  when the element is found and in selected state\par
+Throws selenium.common.exceptions.TimeoutException when the element is not found or not in selected state after wait time.\par
+\par
+\ul\b Example:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.common.by import By\par
+from selenium.webdriver.support.ui import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions as ec\par
+driver = webdriver.Chrome()\par
+driver.get("path to test-page.html")\par
+wait = WebDriverWait(driver, 10)\par
+result = wait.until(ec.element_located_to_be_selected((By.ID, 'subscribe-checkbox-selected')))\par
+print result\par
+driver.close()\par
+\par
+\ul\b element_selection_state_to_be(element, is_selected)\f0 :\ulnone\b0\f1\par
+Expects an element in the web page to be in a specified selection state. Same as \lquote element_located_selection_state_to_be\rquote  except here we directly pass web element instead of locator.\par
+\ul\b Parameters:\ulnone\b0\par
+element \endash  web element\par
+is_selected \endash  It is a boolean value. True \endash  Element should be in selected state. False \endash  Element should not be in selected state.\par
+\ul\b Returns:\ulnone\b0\par
+True \endash  when the element state becomes expected selection state before max wait time\par
+Throws selenium.common.exceptions.TimeoutException when the element is not in expected selection state after wait time.\par
+\par
+\ul\b Example:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.support.ui import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions as ec\par
+driver = webdriver.Chrome()\par
+driver.get("path to test-page.html")\par
+subscribe_checkbox = driver.find_element_by_id('subscribe-checkbox-selected')\par
+wait = WebDriverWait(driver, 10)\par
+result = wait.until(ec.element_selection_state_to_be(subscribe_checkbox, True))\par
+print result\par
+driver.close()\par
+\par
+\ul\b element_to_be_clickable(locator)\f0 :\ulnone\b0\f1\par
+Wait for an element identified by the locator is enabled and visible such that you can click on it. Note that element should be in visible state.\par
+\ul\b Parameters:\ulnone\b0\par
+locator \endash  It is a tuple of (by, path)\par
+\ul\b Returns:\ulnone\b0\par
+element \endash  Returns the element identified by the given locator when it becomes clickable.\par
+Throws selenium.common.exceptions.TimeoutException when the element is not found or not in clickable state after wait time.\par
+\f0\par
+\ul\b Example:\ulnone\b0\par
+\lang9 from selenium import webdriver\par
+from selenium.webdriver.common.by import By\par
+from selenium.webdriver.support.ui import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions as ec\par
+driver = webdriver.Chrome()\par
+driver.get("path to test-page.html")\par
+wait = WebDriverWait(driver, 10)\par
+element = wait.until(ec.element_to_be_clickable((By.ID,'disabled-register-button')))\par
+print element\par
+element.click()\par
+driver.close()\par
+\par
+\ul\b element_to_be_selected(element):\ulnone\b0\par
+Expects an element in the web page to be in selected state. Same as \lquote element_located_to_be_selected\rquote  except here we directly pass web element instead of locator.\par
+\ul\b Parameters:\ulnone\b0\par
+element \f1\endash  web element\par
+\ul\b Returns:\ulnone\b0\par
+True \endash  when the elements selection state becomes expected selection state before max wait time.\par
+Throws selenium.common.exceptions.TimeoutException when the element is not in expected selection state after wait time.\par
+\par
+\ul\b Example:\ulnone\b0\par
+from selenium import webdriver\par
+from selenium.webdriver.support.ui import WebDriverWait\par
+from selenium.webdriver.support import expected_conditions as ec\par
+driver = webdriver.Chrome()\par
+driver.get("path to test-page.html")\par
+subscribe_checkbox = driver.find_element_by_id('subscribe-checkbox-selected')\par
+wait = WebDriverWait(driver, 10)\par
+result = wait.until(ec.element_to_be_selected(subscribe_checkbox))\par
+print result\par
+driver.close()\par
+\par
+\ul\b From these example, we could understand following\f0\lang1033 :\ulnone\b0\f1\lang9\par
+1. when the argument is \lquote locator\rquote  you need to pass tuble of (by, path)\par
+2. when the argument is \lquote element\rquote  you have to find and pass the web element.\par
+3. return values are different for each method\par
+\par
+There could be variations from above observation but they are self explanatory.\par
+\ul\b frame_to_be_available_and_switch_to_it(locator)\f0\lang1033 :\ulnone\b0\f1\lang9\par
+Wait for the given frame to be available and switch to it. If the frame becomes available before wait time, switches the given driver to the specified frame and returns the driver. Otherwise throws TimeoutException.\par
+\par
+\ul\b invisibility_of_element(locator)\f0\lang1033 :\ulnone\b0\f1\lang9\par
+Wait for an element identified by the locator to go invisible or get removed on the DOM. Here you can pass element directly as well instead of locator, invisibility_of_element(element). If the element is removed or not visible in DOM, returns True. Otherwise throws TimeoutException.\par
+There are many other default methods available in expected_conditions class for which we will come up with follow up article.  Thanks for reading and please provide your thoughts in comments section.\par
+\par
+\f0  \ul\b //Wait until departure table visible:\ulnone\b0\par
+    wait.until(ExpectedConditions.visibilityOf(driver.findElements(By.cssSelector(".pika-table")).get(0)));\par
+\par
+\par
+\b #Choose From Month Day Date:\b0\par
+\par
+        datepicker_from=driver.find_element_by_xpath("//input[@id='from']")\par
+        datepicker_from.click()\par
+        time.sleep(2)\par
+        month_from=driver.find_element_by_xpath("//div/select[@class='ui-datepicker-month']")\par
+        select_from_month=Select(month_from)\par
+        select_from_month.select_by_visible_text("Apr")\par
+        time.sleep(2)\par
+        day_from=driver.find_element_by_xpath("//table/tbody/tr/td/a[text()='1']")\par
+        day_from.click()\par
+        time.sleep(5)\par
+\par
+\b         #Choose To Month Day Date:\par
+\b0\par
+        datepicker_to=driver.find_element_by_xpath("//input[@id='to']")\par
+        datepicker_to.click()\par
+        time.sleep(2)\par
+        month_to=driver.find_element_by_xpath("//div/select[@class='ui-datepicker-month']")\par
+        select_to_month=Select(month_to)\par
+        select_to_month.select_by_visible_text("Jun")\par
+        time.sleep(2)\par
+        day_to=driver.find_element_by_xpath("//table/tbody/tr/td/a[text()='1']")\par
+        day_to.click()\par
+        time.sleep(5)\par
+        #Get the string in To input\par
+        to_month_string=datepicker_to.get_attribute('value')\par
+        print to_month_string\par
+        self.assertEqual(to_month_string,'06/01/2016')\par
+\par
+}
+ 
